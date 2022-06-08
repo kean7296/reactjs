@@ -2,16 +2,12 @@ import React, { Component } from 'react'
 import { 
   Card, 
   CardImg, 
-  CardImgOverlay, 
   CardText, 
   CardBody, 
   CardTitle 
 } from 'reactstrap';
 
 export class DishDetail extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   renderDetail(dish) {
       if (dish == null) return <div></div>;
