@@ -13,6 +13,15 @@ export class Main extends Component {
             dishes: DISHES,
             selectedDish: null
         };
+        console.log('Main Component constructor is invoked');
+    }
+
+    componentDidMount() {
+        console.log('Main Component componentDidMount is invoked');
+    }
+
+    componentDidUpdate() {
+    console.log('Main Component componentDidUpdate is invoked');
     }
     
     onDishSelect(dishId) {
