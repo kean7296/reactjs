@@ -17,6 +17,8 @@ export class Menu extends Component {
         this.state = {
             selectedDish: null
         };
+
+        console.log('Menu Component constructor is invoked');
     }
 
     onDishSelect(dish) {
@@ -24,7 +26,7 @@ export class Menu extends Component {
     }
 
     renderDish(dish) {
-        if (dish == null) return (<div></div>);
+        if (dish == null) return <div></div>;
 
         return (
             <Card>
@@ -35,6 +37,23 @@ export class Menu extends Component {
                 </CardBody>
             </Card>
         );
+    }
+
+    renderComment(dish) {
+        if (dish == null) return <div></div>;
+        // return console.log(dish);
+        return dish.comments.map(comment => {
+            return (
+                <div key={comment.id} className="mb-2">
+                    <p>{comment.comment}</p>
+                    <small>--{comment.author}, {comment.date}</small>
+                </div>
+            );
+        });
+    }
+
+    componentDidMount() {
+        console.log('Menu Component componentDidMount  is invoked');
     }
 
     render() {
@@ -51,13 +70,21 @@ export class Menu extends Component {
             );
         });
 
+        console.log('Menu Component render is invoked');
+
         return (
             <div className='container'>
                 <div className='row my-3'>
                     {menu}
                 </div>
                 <div className='row'>
-                    {this.renderDish(this.state.selectedDish)}
+                    <div className='col-12 col-md-5 m-1'>
+                        {this.renderDish(this.state.selectedDish)}
+                    </div>
+                    <div className='col-12 col-md-5 m-1'>
+                        <h2>{this.state.selectedDish != null ? 'Comment' : ''}</h2>
+                        {this.renderComment(this.state.selectedDish)}
+                    </div>
                 </div>
             </div>
         )
