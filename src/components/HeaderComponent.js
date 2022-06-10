@@ -20,7 +20,7 @@ class Header extends Component {
 
     render() {
         return (
-            <>
+            <div className='mb-3'>
                 <Navbar dark expand="md" color="success">
                     <div className='container'>
                         <NavbarToggler onClick={this.toggleNav} />
@@ -63,7 +63,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </Jumbotron>
-            </>
+            </div>
         );
     }
 }

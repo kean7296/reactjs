@@ -32,7 +32,16 @@ export const LEADERS = [
       image: '/assets/images/alberto.png',
       designation: 'Executive Chef',
       abbr: 'EC',
-      featured: true,
+      featured: false,
       description: 'Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!'
+    },
+    {
+      id: 4,
+      name: 'Kenneth Andales',
+      image: '/assets/images/cover.jpg',
+      designation: 'Software Developer',
+      abbr: 'SD',
+      featured: true,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis condimentum commodo libero, sit amet vestibulum velit gravida sed. Donec tempus malesuada nisi, sed pharetra nulla tincidunt vel. Maecenas dapibus sollicitudin lorem dapibus rutrum. Nulla sodales elit in neque vehicula ultrices. Duis ultrices mattis diam, ac varius massa dapibus quis.'
     }
   ];

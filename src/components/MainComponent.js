@@ -50,14 +50,22 @@ export class Main extends Component {
             );
         };
 
+        const dishWithId = ({match}) => {
+            return (
+                <DishDetail dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+                    comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+                />                
+            );
+        }
+
         return (
         <>
             <Header/>
             <Switch>
                 <Route path="/home" component={HomePage} />
                 <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                <Route path="/menu/:dishId" component={dishWithId} />
                 <Route exact path="/contactus" component={Contact} />
-                <Route exact path="/detail" component={() => <DishDetail dishes={this.state.dishes} />} />
                 <Redirect to="/home" />
             </Switch>
             <Footer/>
