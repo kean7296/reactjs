@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
 import DishDetail from './DishDetailComponent';
+import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 export class Main extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ export class Main extends Component {
 
         this.state = {
             dishes: DISHES,
-            selectedDish: null
+            // selectedDish: null
         };
         console.log('Main Component constructor is invoked');
     }
@@ -25,16 +27,24 @@ export class Main extends Component {
     console.log('Main Component componentDidUpdate is invoked');
     }
     
-    onDishSelect(dishId) {
-        this.setState({selectedDish: dishId});
-    }
+    // onDishSelect(dishId) {
+    //     this.setState({selectedDish: dishId});
+    // }
 
     render() {
+        const HomePage = () => {
+            return <Home/>;
+        };
+
         return (
         <>
             <Header/>
-            <Menu dishes={this.state.dishes}  onClick={(id)=>this.onDishSelect(id)} />
-            <DishDetail dishes={this.state.dishes.filter((dish)=>dish.id === this.state.selectedDish)[0]} />
+            <Switch>
+                <Route path="/home" component={HomePage} />
+                <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes} />} />
+                <Route exact path="/detail" component={() => <DishDetail dishes={this.state.dishes} />} />
+                <Redirect to="/home" />
+            </Switch>
             <Footer/>
         </>
         )

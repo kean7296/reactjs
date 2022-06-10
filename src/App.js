@@ -2,32 +2,19 @@
 import React, { Component } from 'react';
 import Main from './components/MainComponent';
 import './App.css';
+import { BrowserRouter } from 'react-router-dom';
 
 export class App extends Component {
 
     render() {
-        return <Main/>;
+        return (
+            <BrowserRouter>
+                <div>
+                    <Main/>
+                </div>
+            </BrowserRouter>
+        );
     }
 }
-
-// const App = React.createElement(
-//     'div',
-//     {className: 'greeting'},
-//     'Hello, React'
-// );
-
-// const App = {
-//     type: 'h1',
-//     props: {
-//         className: 'greeting',
-//         children: 'Hello, React'
-//     }
-// };
-
-// function App() {
-//     return ( 
-//         <div>Hello</div>
-//     );
-// }
 
 export default App;
