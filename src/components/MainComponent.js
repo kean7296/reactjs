@@ -1,8 +1,9 @@
 // import logo from './logo.svg';
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './MenuComponent';
 import DishDetail from './DishDetailComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
 
 export class Main extends Component {
@@ -30,18 +31,12 @@ export class Main extends Component {
 
     render() {
         return (
-        <div className=''>
-            <Navbar dark color="success">
-                <div className='container'>
-                    <NavbarBrand href="/">Home</NavbarBrand>
-                    <NavbarBrand href="/menu">Menu</NavbarBrand>
-                    <NavbarBrand href="/about">About</NavbarBrand>
-                    <NavbarBrand href="/contact">Contact</NavbarBrand>
-                </div>
-            </Navbar>
+        <>
+            <Header/>
             <Menu dishes={this.state.dishes}  onClick={(id)=>this.onDishSelect(id)} />
             <DishDetail dishes={this.state.dishes.filter((dish)=>dish.id === this.state.selectedDish)[0]} />
-        </div>
+            <Footer/>
+        </>
         )
     }
 }
