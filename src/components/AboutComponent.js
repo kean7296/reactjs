@@ -13,7 +13,7 @@ function LeaderList({leaders}) {
     if (leaders === null) return <div></div>;
     return leaders.map((leader) => {
         return (
-            <div className='row mb-2'>
+            <div key={leader.id} className='row mb-2'>
                 <div className='col-md-2'>
                     <Media object src={leader.image} alt={leader.name} height="100" width="100"/>
                 </div>
