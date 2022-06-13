@@ -8,7 +8,7 @@ import About from './AboutComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import { connect } from 'react-redux';
-
+import { addComment } from '../redux/ActionCreaters';
 
 import { 
     Switch, 
@@ -17,14 +17,16 @@ import {
     withRouter 
 } from 'react-router-dom';
 
-const mapStateToProps = state => {
-    return {
-        dishes: state.dishes,
-        promotions: state.promotions,
-        comments: state.comments,
-        leaders: state.leaders
-    }
-};
+const mapStateToProps = state => ({
+    dishes: state.dishes,
+    promotions: state.promotions,
+    comments: state.comments,
+    leaders: state.leaders
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addComment: (dishId, rating, author, commment) => dispatch(addComment(dishId, rating, author, commment))
+});
 
 export class Main extends Component {
     constructor(props) {
@@ -32,19 +34,6 @@ export class Main extends Component {
 
         console.log('Main Component constructor is invoked');
     }
-
-
-    // componentDidMount() {
-    //     console.log('Main Component componentDidMount is invoked');
-    // }
-
-    // componentDidUpdate() {
-    // console.log('Main Component componentDidUpdate is invoked');
-    // }
-    
-    // onDishSelect(dishId) {
-    //     this.setState({selectedDish: dishId});
-    // }
 
     render() {
         const HomePage = () => {
@@ -61,6 +50,7 @@ export class Main extends Component {
             return (
                 <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
                     comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
+                    addComment={this.props.addComment}
                 />                
             );
         }
@@ -88,4 +78,4 @@ export class Main extends Component {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Main));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

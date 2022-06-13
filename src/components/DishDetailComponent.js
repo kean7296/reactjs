@@ -43,17 +43,18 @@ export default class DishDetail extends React.Component {
   }
 
   onSubmit(values) {
-    console.log(`Current State is: ${JSON.stringify(values)}`);
-    alert(`Current State is: ${JSON.stringify(values)}`);
+    this.toggleModal();
+    console.log(`Dish ID: ${this.props.dish.id}`);
+    this.props.addComment(this.props.dish.id, values.rating, values.name, values.comment);
   }
 
   render() {
-    const Rendercomment = ({ comments }) => {
+    const RenderComments = () => {
+      if (this.props.comments == null) return <div></div>;
 
-      if (comments == null) return <div></div>;
-      return comments.map((comment) => {
+      return this.props.comments.map((comment) => {
         return (
-            <div key={comment.id} className="mb-2">
+            <div key={comment.id} className="my-4">
                 <p>{comment.comment}</p>
                 <small>--{comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date (Date.parse(comment.date)))}</small>
             </div>
@@ -62,9 +63,9 @@ export default class DishDetail extends React.Component {
     }
 
     
-    const RenderDish = ({ dish }) => {
-      if (dish == null) return <div></div>;
-      
+    const RenderDish = () => {
+      if (this.props.dish == null) return <div></div>;
+      const dish = this.props.dish;
       return (
         <Card>
           <CardImg width="100%" src={dish.image} alt={dish.name} />
@@ -164,11 +165,11 @@ export default class DishDetail extends React.Component {
         </div>
         <div className='row'>
           <div className='col-12 col-md-5 m-1'>
-              <RenderDish dish={this.props.dish} />
+              <RenderDish/>
           </div>
           <div className='col-12 col-md-5 m-1'>
               <h2>Comment</h2>
-              <Rendercomment comments={this.props.comments} />
+              <RenderComments/>
               <Button outline 
                 className='btn btn-light' 
                 style={{border: '1px solid #c5c9c6'}}
