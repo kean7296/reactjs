@@ -21,6 +21,7 @@ import {
   Errors
 } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 const required = (val) => val && val.length;
@@ -150,6 +151,23 @@ export default class DishDetail extends React.Component {
       );
     }
 
+    if (this.props.isLoading) {
+      return (
+        <div className='container'>
+          <div className='row'>
+            <Loading/>
+          </div>
+        </div>
+      );
+    } else if (this.props.errMess) {
+      return (
+        <div className='container'>
+          <div className='row'>
+            <h4>{this.props.errMess}</h4>
+          </div>
+        </div>
+      );
+    }
 
     return (
       <div className='container mb-2'>
