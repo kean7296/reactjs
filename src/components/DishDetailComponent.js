@@ -46,8 +46,8 @@ export default class DishDetail extends React.Component {
 
   onSubmit(values) {
     this.toggleModal();
-    console.log(`Dish ID: ${this.props.dish.id}`);
-    this.props.addComment(this.props.dish.id, values.rating, values.name, values.comment);
+    // console.log(`Dish ID: ${this.props.dish.id}`);
+    this.props.postComment(this.props.dish.id, values.rating, values.name, values.comment);
   }
 
   render() {
