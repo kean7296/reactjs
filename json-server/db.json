@@ -255,8 +255,17 @@
       "image": "images/alberto.png",
       "designation": "Executive Chef",
       "abbr": "EC",
-      "featured": true,
+      "featured": false,
       "description": "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
+    },
+    {
+      "id": 4,
+      "name": "Kenneth Andales",
+      "image": "images/ken.jpg",
+      "designation": "Software Developer",
+      "abbr": "SD",
+      "featured": true,
+      "description": "Sed eget scelerisque elit. Vestibulum ultricies, justo in ultrices interdum, arcu nunc auctor ante, et molestie ex metus et mauris. Etiam ut ligula sem. Curabitur neque mi, fermentum eu hendrerit nec, pulvinar ac risus. Sed nec facilisis leo. Nunc porttitor scelerisque accumsan. Nullam vestibulum urna sed est convallis hendrerit. In mi nibh, scelerisque eu dictum quis, convallis sit amet enim. Cras risus ante, cursus quis suscipit vestibulum, fermentum ac mi."
     }
   ],
   "feedback": [

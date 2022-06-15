@@ -206,7 +206,8 @@ export default class Contact extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={{size: 10, offset: 2}}>
-                                    <Button type="submit" color="primary">Send Feedback</Button>
+                                    <Button type="submit" color="primary">Send Feedback</Button>{' '}
+                                    <Button type="button" color="light">Cancel</Button>
                                 </Col>
                             </Row>
                         </Form>

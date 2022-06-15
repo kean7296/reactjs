@@ -23,6 +23,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 
 const required = (val) => val && val.length;
@@ -54,14 +55,22 @@ export default class DishDetail extends React.Component {
     const RenderComments = () => {
       if (this.props.comments == null) return <div></div>;
 
-      return this.props.comments.map((comment) => {
-        return (
-            <div key={comment.id} className="my-4">
-                <p>{comment.comment}</p>
-                <small>--{comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date (Date.parse(comment.date)))}</small>
-            </div>
-        );
-      });
+      return (
+        <Stagger in>
+          <ul className='list-unstyled'>
+            {this.props.comments.map((comment) => {
+              return (
+                <Fade in>
+                  <li key={comment.id} className="my-4">
+                    <p>{comment.comment}</p>
+                    <small>--{comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date (Date.parse(comment.date)))}</small>
+                  </li>
+                </Fade>
+              );
+            })}
+          </ul>
+        </Stagger>
+      )
     }
 
     
@@ -69,13 +78,18 @@ export default class DishDetail extends React.Component {
       if (this.props.dish == null) return <div></div>;
       const dish = this.props.dish;
       return (
-        <Card>
-          <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
-          <CardBody>
-            <CardTitle>{dish.name}</CardTitle>
-            <CardText>{dish.description}</CardText>
-          </CardBody>
-        </Card>
+          <FadeTransform in 
+            transformProps={{
+              exitTransform: 'scale(0.5) translateY(-50%)'
+            }}>
+            <Card>
+              <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+              <CardBody>
+                <CardTitle>{dish.name}</CardTitle>
+                <CardText>{dish.description}</CardText>
+              </CardBody>
+            </Card>
+          </FadeTransform>
         );
     }
       
