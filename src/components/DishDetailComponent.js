@@ -56,11 +56,11 @@ export default class DishDetail extends React.Component {
       if (this.props.comments == null) return <div></div>;
 
       return (
-        <Stagger in>
-          <ul className='list-unstyled'>
+        <ul className='list-unstyled'>
+          <Stagger in>
             {this.props.comments.map((comment) => {
               return (
-                <Fade in>
+                <Fade>
                   <li key={comment.id} className="my-4">
                     <p>{comment.comment}</p>
                     <small>--{comment.author}, {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: 'short', day: '2-digit'}).format(new Date (Date.parse(comment.date)))}</small>
@@ -68,8 +68,8 @@ export default class DishDetail extends React.Component {
                 </Fade>
               );
             })}
-          </ul>
-        </Stagger>
+            </Stagger>
+        </ul>
       )
     }
 
