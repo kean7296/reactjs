@@ -51,8 +51,8 @@ export default function Home(props) {
                 </div>
                 <div className='col-12 col-md m-1'>
                     <RenderCard item={props.leader} 
-                        isLoading={props.dishesLoading} 
-                        errMess={props.dishesErrMess} />
+                        isLoading={props.leadersLoading} 
+                        errMess={props.leadersErrMess} />
                 </div>
             </div>
         </div>

@@ -8,34 +8,53 @@ import {
     Media 
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Stagger, Fade } from 'react-animation-components';
+import { Loading } from './LoadingComponent';
 
 function LeaderList({leaders}) {
     if (leaders === null) return <div></div>;
-    return leaders.map((leader) => {
+    return (
+        <Stagger in>
+        {leaders.map((leader) => {
         return (
-            <div key={leader.id} className='row mb-2'>
-                <div className='col-md-2'>
-                    <Media object src={leader.image} alt={leader.name} height="100" width="100"/>
-                </div>
-                <div className='col-md-10'>
-                    <div>
-                        <h3>{leader.name}</h3>
-                        <p>{leader.designation}</p>
-                        <p>{leader.description}</p>
+            <Fade>
+                <div key={leader.id} className='row mb-2'>
+                    <div className='col-md-2'>
+                        <Media object className='img-thumbnail' src={baseUrl + leader.image} alt={leader.name} height="100" width="100"/>
+                    </div>
+                    <div className='col-md-10'>
+                        <div>
+                            <h3>{leader.name}</h3>
+                            <p>{leader.designation}</p>
+                            <p>{leader.description}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Fade>
         );
-    });
+    })}
+    </Stagger>);
 }
 
 export default function About(props) {
-
-    const leaders = props.leaders.map((leader) => {
+    if (props.leadersLoading) {
         return (
-            <p>Leader {leader.name}</p>
+          <div className='container'>
+            <div className='row'>
+              <Loading/>
+            </div>
+          </div>
         );
-    });
+      } else if (props.leaderErrMess) {
+        return (
+          <div className='container'>
+            <div className='row'>
+              <h4>{this.props.errMess}</h4>
+            </div>
+          </div>
+        );
+      }
 
     return(
         <div className="container">

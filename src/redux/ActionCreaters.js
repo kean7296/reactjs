@@ -39,6 +39,46 @@ export const postComment = (dishId, rating, author, comment) => (dispatch) => {
     .catch(error => { console.log(`Post comments: ${error.message}`); alert(`Your comment could not be posted \nError: ${error.message}`); })
 };
 
+export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => {
+    return fetch(baseUrl + 'feedback', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            firstname: firstname,
+            lastname: lastname,
+            telnum: telnum,
+            email: email,
+            agree: agree,
+            contactType: contactType,
+            message: message,
+            date: new Date().toISOString()
+        }),
+        credentials: 'same-origin'
+    }).then(response => {
+        if (!response.ok) {
+            var err = new Error(`Error: ${response.status}: ${response.statusText}`);
+            err.response = response;
+            throw err;
+        }
+        return response;
+    },
+    error => {
+        var errMess = new Error(error.message);
+        throw errMess;
+    }).then(response => {
+        return response.json();
+    }).then(data => {
+        alert(JSON.stringify(data));
+        alert(`Thank you for your feedback :) \n${JSON.stringify(data)}`);
+    })
+    .catch(error => {
+        console.log(`Post feedback: ${error.message}`);
+        alert(`Your feedback could not posted \nError: ${error.message}`);
+    });
+};
+
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
 
@@ -58,6 +98,28 @@ export const fetchDishes = () => (dispatch) => {
         .then(response => response.json())
         .then(dishes => dispatch(addDishes(dishes)))
         .catch(error => dispatch(dishesFailed(error.message)));
+        // .then(data => console.log(`DISHES DATA: ${JSON.stringify(data)}`));
+};
+
+export const fetchLeaders = () => (dispatch) => {
+    dispatch(leadersLoading(true));
+
+    return fetch(baseUrl + 'leaders')
+        .then(response => {
+            if (!response.ok) {
+                var err = new Error(`Error: ${response.status}: ${response.statusText}`);
+                err.response = response;
+                throw err;
+            }
+            return response;            
+        },
+        error => {
+            var errMess = new Error(error.message);
+            throw errMess;
+        })
+        .then(response => response.json())
+        .then(leaders => dispatch(addLeaders(leaders)))
+        .catch(error => dispatch(leadersFailed(error.message)));
         // .then(data => console.log(`DISHES DATA: ${JSON.stringify(data)}`));
 };
 
@@ -139,4 +201,18 @@ export const addPromos = (promos) => ({
 
 export const promosLoading = () => ({
     type: ActionTypes.PROMOS_LOADING
+});
+
+export const addLeaders = (leader) => ({
+    type: ActionTypes.ADD_LEADERS,
+    payload: leader
+});
+
+export const leadersLoading = () => ({
+    type: ActionTypes.LEADERS_LOADING
+});
+
+export const leadersFailed = (errmess) => ({
+    type: ActionTypes.PROMOS_FAILED,
+    payload: errmess
 });
